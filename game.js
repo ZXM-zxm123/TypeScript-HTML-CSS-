@@ -125,6 +125,10 @@ class TicTacToe {
     }
 
     makeMove(index) {
+        if (this.state.gameOver || this.state.board[index] !== '') {
+            return;
+        }
+
         this.state.board[index] = this.state.currentPlayer;
         this.updateCellUI(index);
 
