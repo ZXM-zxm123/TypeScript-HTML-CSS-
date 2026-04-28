@@ -113,14 +113,22 @@ class TicTacToe {
         const cell = e.target;
         const index = parseInt(cell.dataset.index);
 
-        if (this.state.board[index] !== '' || this.state.gameOver) {
+        if (this.state.gameOver) {
+            return;
+        }
+
+        if (this.state.board[index] !== '') {
+            return;
+        }
+
+        if (this.state.gameMode === 'pve' && this.state.currentPlayer !== 'X') {
             return;
         }
 
         this.makeMove(index);
 
         if (!this.state.gameOver && this.state.gameMode === 'pve' && this.state.currentPlayer === 'O') {
-            setTimeout(() => this.makeAIMove(), 500);
+            setTimeout(() => this.makeAIMove(), 300);
         }
     }
 
