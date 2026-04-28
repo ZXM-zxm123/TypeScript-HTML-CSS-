@@ -151,18 +151,30 @@ class TicTacToe {
         const cell = e.target as HTMLDivElement;
         const index = parseInt(cell.dataset.index as string);
 
-        if (this.state.board[index] !== '' || this.state.gameOver) {
+        if (this.state.gameOver) {
+            return;
+        }
+
+        if (this.state.board[index] !== '') {
+            return;
+        }
+
+        if (this.state.gameMode === 'pve' && this.state.currentPlayer !== 'X') {
             return;
         }
 
         this.makeMove(index);
 
         if (!this.state.gameOver && this.state.gameMode === 'pve' && this.state.currentPlayer === 'O') {
-            setTimeout(() => this.makeAIMove(), 500);
+            setTimeout(() => this.makeAIMove(), 300);
         }
     }
 
     private makeMove(index: number): void {
+        if (this.state.gameOver || this.state.board[index] !== '') {
+            return;
+        }
+
         this.state.board[index] = this.state.currentPlayer;
         this.updateCellUI(index);
 
