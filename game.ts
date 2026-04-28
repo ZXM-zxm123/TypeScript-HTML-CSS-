@@ -163,6 +163,10 @@ class TicTacToe {
     }
 
     private makeMove(index: number): void {
+        if (this.state.gameOver || this.state.board[index] !== '') {
+            return;
+        }
+
         this.state.board[index] = this.state.currentPlayer;
         this.updateCellUI(index);
 
